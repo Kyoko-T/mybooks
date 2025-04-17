@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <h2>本情報新規作成</h2>
+                <h2>本の情報を新規作成する</h2>
             </div>
         </div>
     </div>
