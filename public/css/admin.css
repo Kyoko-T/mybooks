@@ -1,34 +1,34 @@
 body {
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #000;
-  color: #fff;
+  background-color: #f2f9df;
+  color: #352828;
 }
 
 .navbar-laravel {
-  background-color: #000;
+  background-color: #352828;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
 .navbar-brand {
-  color: #fff !important;
+  color: #352828 !important;
 }
 
 .nav-link {
-  color: #fff !important;
+  color: #352828 !important;
 }
 
 .table-dark {
-  color: #fff;
+  color: #352828;
 }
 
 .list-group-item {
-  border-color: #fff;
-  background-color: #000;
+  border-color: #352828;
+  background-color: #f2f9df;
 }
 
 .login-box {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 .login-header {
@@ -44,7 +44,7 @@ body {
 }
 
 .list-group-item {
-  color: #fff;
-  border-color: #fff;
-  background-color: #000;
+  color: #352828;
+  border-color: #352828;
+  background-color: #f2f9df;
 }
