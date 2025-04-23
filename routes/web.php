@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 use App\Http\Controllers\Admin\BooksController;
 Route::controller(BooksController::class)->prefix('admin')->group(function() {
-    Route::get('books/create', 'add');
+    Route::get('books/create', 'add')->middleware('auth');
 });
 
 Auth::routes();
