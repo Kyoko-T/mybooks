@@ -18,8 +18,9 @@ Route::get('/', function () {
 });
 
 use App\Http\Controllers\Admin\BooksController;
-Route::controller(BooksController::class)->prefix('admin')->group(function() {
-    Route::get('books/create', 'add')->middleware('auth');
+Route::controller(BooksController::class)->prefix('admin')->name('admin.')->middleware('auth')->group(function() {
+    Route::get('books/create', 'add')->name('books.add');
+    Route::post('books/create', 'create')->name('books.create');
 });
 
 Auth::routes();

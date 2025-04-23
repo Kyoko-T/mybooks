@@ -12,4 +12,10 @@ class BooksController extends Controller
     {
         return view('admin.books.create');
     }
+
+    public function create(Request $request)
+    {
+        //admin/books/createにリダイレクトする
+        return redirect('admin/books/create');
+    }
 }
