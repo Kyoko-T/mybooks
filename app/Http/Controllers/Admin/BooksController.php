@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 class BooksController extends Controller
 {
     //以下追記
+    //トップページを表示するアクション
+    public function index()
+    {
+        return view('books.top');
+    }
+
     public function add()
     {
         return view('admin.books.create');

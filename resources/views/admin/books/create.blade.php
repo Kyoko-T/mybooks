@@ -33,6 +33,12 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-md-2">出版年月日</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-md-2">紹介文</label>
                         <div class="col-md-10">
                             <textarea class="form-control" name="text" rows="10">{{ old('text') }}</textarea>

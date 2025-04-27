@@ -23,7 +23,7 @@ body {
 }
 
 .list-group-item {
-  border-color: #352828;
+  border-color: rgba(0, 0, 0, 0.2470588235);
   background-color: #f2f9df;
 }
 
