@@ -26,4 +26,4 @@ Route::controller(BooksController::class)->prefix('admin')->name('admin.')->midd
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/search', [App\Http\Controllers\HomeController::class, 'search'])->name('search');
+Route::get('/search', [App\Http\Controllers\HomeController::class, 'search'])->name('search');

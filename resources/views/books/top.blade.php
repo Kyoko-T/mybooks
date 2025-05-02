@@ -1,7 +1,6 @@
 {{-- layouts/admin.blade.phpを読み込む --}}
 @extends('layouts.admin')
 
-
 {{-- admin.blade.phpの@yield('title')に'トップページ'を埋め込む --}}
 @section('title', 'トップページ')
 
@@ -11,25 +10,38 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <h2>絵本検索</h2>
-                <form action="{{ route('search') }}" method="post" enctype="multipart/form-data">
 
-                    @if (count($errors) > 0)
-                        <ul>
-                            @foreach($errors->all() as $e)
-                                <li>{{ $e }}</li>
-                            @endforeach
-                        </ul>
-                    @endif
+                <form action="{{ route('search') }}" method="get">
+                    
+
                     <div class="form-group row">
                         <label class="col-md-2">タイトル</label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="title" value="{{ old('title') }}">
                         </div>
                     </div>
+
                     
-                    @csrf
                     <input type="submit" class="btn btn-primary" value="検索">
                 </form>
+
+                {{-- 検索結果の表示 --}}
+                @if (!empty($books))
+                    <div class="mt-4">
+                        <h3>検索結果</h3>
+                        <ul class="list-group">
+                            @foreach ($books as $book)
+                                <li class="list-group-item">
+                                    <strong>タイトル:</strong> {{ $book['title'] ?? '不明' }}<br>
+                                    <strong>著者:</strong> {{ $book['creator'] ?? '不明' }}<br>
+                                    <strong>出版社:</strong> {{ $book['publisher'] ?? '不明' }}<br>
+                                    <strong>ISBN:</strong> {{ $book['isbn'] ?? 'なし' }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
             </div>
         </div>
     </div>
