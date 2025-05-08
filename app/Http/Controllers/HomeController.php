@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Book;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('books.top');
+        $books = Book::all();
+        dd($books);
+        return view('books.top', ['books' => $books]);
     }
 
     /**
@@ -54,17 +57,21 @@ class HomeController extends Controller
         $data->registerXPathNamespace('xsi', 'http://www.w3.org/2001/XMLSchema-instance');
 
         $records = $data->xpath('//srw:recordData');
-
+        dd($records);
         $message = "";
 
         foreach ($records as $record) {
+            $record->registerXPathNamespace('srw', 'http://www.loc.gov/zing/srw/');
             $record->registerXPathNamespace('dc', 'http://purl.org/dc/elements/1.1/');
             $record->registerXPathNamespace('dcndl', 'http://ndl.go.jp/dcndl/terms/');
             $record->registerXPathNamespace('xsi', 'http://www.w3.org/2001/XMLSchema-instance');
+            //dd($record);
 
             $isbnNodes = $record->xpath('.//dc:identifier[@xsi:type="dcndl:ISBN"]');
+            
+            // ISBNがなければスキップ
             if (empty($isbnNodes)) {
-                continue; // ISBNがなければスキップ
+                continue; 
             }
 
             $title = $record->xpath('.//dc:title')[0] ?? '';
@@ -74,13 +81,13 @@ class HomeController extends Controller
             // ISBNだけを抽出（xsi:type="dcndl:ISBN"）
             $isbnNodes = $record->xpath('.//dc:identifier[@xsi:type="dcndl:ISBN"]');
             $isbn = isset($isbnNodes[0]) ? (string)$isbnNodes[0] : '';
+
             // 結果出力
-            
             $message = $isbn;
             
-            //dd($message);
+            
         }
-        dd($xml);
+        //dd($xml);
         $xmlObj = simplexml_load_string($xml);
         //dd($xmlObj);
         //$exResData = simplexml_load_string($xmlObj->records);
