@@ -17,7 +17,7 @@
                     <div class="form-group row">
                         <label class="col-md-2">タイトル</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="title" value="{{ old('title') }}">
+                        <input type="text" class="form-control" name="title" value="{{ old('title', $keyword ?? '') }}">
                         </div>
                     </div>
 
@@ -32,10 +32,16 @@
                         <ul class="list-group">
                             @foreach ($books as $book)
                                 <li class="list-group-item">
-                                    <strong>タイトル:</strong> {{ $book['title'] ?? '不明' }}<br>
-                                    <strong>著者:</strong> {{ $book['creator'] ?? '不明' }}<br>
-                                    <strong>出版社:</strong> {{ $book['publisher'] ?? '不明' }}<br>
-                                    <strong>ISBN:</strong> {{ $book['isbn'] ?? 'なし' }}
+                                    <strong>タイトル:</strong> {{ $book->title ?? '不明' }}<br>
+                                    <strong>説明文:</strong> {{ $book->caption ?? '不明' }}<br>
+                                    <strong>キーワード:</strong> {{ $book->keyword ?? '不明' }}<br>
+                                    <strong>著者:</strong> {{ $book->creator ?? '不明' }}<br>
+                                    <strong>出版社:</strong> {{ $book->publisher ?? '不明' }}<br>
+
+                                    @if (!empty($book->image))
+                                        <img src="{{ asset('images/' . $book->image) }}" alt="{{ $book->title }}" style="max-width: 200px;">
+                                    @endif    
+                                    
                                 </li>
                             @endforeach
                         </ul>
