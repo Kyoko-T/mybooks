@@ -37,10 +37,26 @@
                                     <strong>キーワード:</strong> {{ $book->keyword ?? '不明' }}<br>
                                     <strong>著者:</strong> {{ $book->creator ?? '不明' }}<br>
                                     <strong>出版社:</strong> {{ $book->publisher ?? '不明' }}<br>
+                                    <strong>ISBN:</strong> {{ $book->isbn ?? 'なし' }}<br>
 
-                                    @if (!empty($book->image))
-                                        <img src="{{ asset('images/' . $book->image) }}" alt="{{ $book->title }}" style="max-width: 200px;">
-                                    @endif    
+                                    {{-- 画像表示：まずはAPIから直接取得して試す --}}
+                                    @if (!empty($book->isbn))
+                                        @php
+                                            $isbn = $book->isbn;
+                                            $url = "https://www.googleapis.com/books/v1/volumes?q=isbn:$isbn";
+                                            $json = @file_get_contents($url);
+                                            $data = json_decode($json, true);
+                                            $thumbnail = $data['items'][0]['volumeInfo']['imageLinks']['thumbnail'] ?? null;
+                                        @endphp
+
+                                        @if ($thumbnail)
+                                            <img src="{{ $thumbnail }}" alt="{{ $book->title }}" style="max-width: 200px;">
+                                        @else
+                                            <p>画像なし</p>
+                                        @endif
+                                    @else
+                                        <p>ISBNが登録されていません</p>
+                                    @endif
                                     
                                 </li>
                             @endforeach
