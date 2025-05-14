@@ -26,6 +26,19 @@ class HomeController extends Controller
     {
         $books = Book::all();
         //dd($books);
+
+        foreach ($books as $book) {
+            if (!empty($book->isbn)) {
+                $url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" . $book->isbn;
+                $json = @file_get_contents($url);
+                $data = json_decode($json, true);
+                $thumbnail = $data['items'][0]['volumeInfo']['imageLinks']['thumbnail'] ?? null;
+                $book->thumbnail = $thumbnail;
+            } else {
+                $book->thumbnail = null;
+            }
+        }
+
         return view('books.top', ['books' => $books]);
     }
 
@@ -43,6 +56,18 @@ class HomeController extends Controller
         } else {
             // titleカラムに部分一致する本を取得
             $books = Book::where('title', 'like', '%' . $keyword . '%')->get();
+
+            foreach ($books as $book) {
+                if (!empty($book->isbn)) {
+                    $url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" . $book->isbn;
+                    $json = @file_get_contents($url);
+                    $data = json_decode($json, true);
+                    $thumbnail = $data['items'][0]['volumeInfo']['imageLinks']['thumbnail'] ?? null;
+                    $book->thumbnail = $thumbnail;
+                } else {
+                    $book->thumbnail = null;
+                }
+            }
         }
 
         return view('books.top', compact('books', 'keyword'));

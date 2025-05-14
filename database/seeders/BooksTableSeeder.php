@@ -51,10 +51,20 @@ class BooksTableSeeder extends Seeder
                 'keyword' => 'のりもの',
                 'creator' => 'えのもとえつこ　と　かまたあゆみ',
                 'publisher' => '福音館書店',
-                'isbn' => '978-4-8340-8474-0',
+                'isbn' => '9784834084740',
+            ],
+            [
+                'title' => 'タヌキとキツネ　ちびっこの冒険',
+                'caption' => 'タヌキとキツネの小さなころのお話',
+                'image' => 'tanukitokitune.jpg',
+                'keyword' => 'どうぶつ',
+                'creator' => 'アタモト',
+                'publisher' => 'フロンティアワークス',
+                'isbn' => '9784866574417',
             ],
         ]);
-
+        
+        
         
    }
 }
