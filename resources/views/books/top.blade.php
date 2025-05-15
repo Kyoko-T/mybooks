@@ -26,31 +26,34 @@
                 </form>
 
                 {{-- 検索結果の表示 --}}
-                @if (!empty($books))
+                @if (!empty($searched))
                     <div class="mt-4">
                         <h3>検索結果</h3>
-                        <ul class="list-group">
-                            @foreach ($books as $book)
-                                <li class="list-group-item">
-                                    <strong>タイトル:</strong> {{ $book->title ?? '不明' }}<br>
-                                    <strong>説明文:</strong> {{ $book->caption ?? '不明' }}<br>
-                                    <strong>キーワード:</strong> {{ $book->keyword ?? '不明' }}<br>
-                                    <strong>著者:</strong> {{ $book->creator ?? '不明' }}<br>
-                                    <strong>出版社:</strong> {{ $book->publisher ?? '不明' }}<br>
-                                    <strong>ISBN:</strong> {{ $book->isbn ?? 'なし' }}<br>
 
-                                    @if ($book->image)
-                                        <img src="{{ asset('img/' . $book->image) }}" alt="{{ $book->title }}" style="max-width: 200px;">
-                                    @else
-                                        <p>画像なし</p>
-                                    @endif
-                                    
-                                </li>
-                            @endforeach
-                        </ul>
+                        @if ($books->isEmpty())
+                            <p>検索結果は0件でした。</p>
+                        @else
+                            <ul class="list-group">
+                                @foreach ($books as $book)
+                                    <li class="list-group-item">
+                                        <strong>タイトル:</strong> {{ $book->title ?? '不明' }}<br>
+                                        <strong>説明文:</strong> {{ $book->caption ?? '不明' }}<br>
+                                        <strong>キーワード:</strong> {{ $book->keyword ?? '不明' }}<br>
+                                        <strong>著者:</strong> {{ $book->creator ?? '不明' }}<br>
+                                        <strong>出版社:</strong> {{ $book->publisher ?? '不明' }}<br>
+                                        <strong>ISBN:</strong> {{ $book->isbn ?? 'なし' }}<br>
+
+                                        @if ($book->image)
+                                            <img src="{{ asset('img/' . $book->image) }}" alt="{{ $book->title }}" style="max-width: 200px;">
+                                        @else
+                                            <p>画像なし</p>
+                                        @endif
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
                     </div>
                 @endif
-
             </div>
         </div>
     </div>

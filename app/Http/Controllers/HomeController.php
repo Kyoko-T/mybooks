@@ -39,17 +39,21 @@ class HomeController extends Controller
     {
         $keyword = $request->input('title');
 
+        // 検索キーワードが空なら全件表示にする
         if (empty($keyword)) {
-            // 検索キーワードが空なら全件表示にする
             $books = Book::all();
         } else {
             // titleカラムに部分一致する本を取得
             $books = Book::where('title', 'like', '%' . $keyword . '%')->get();
-
-            
+       
         }
 
-        return view('books.top', compact('books', 'keyword'));
+        return view('books.top', [
+            'books' => $books,
+            'keyword' => $keyword,
+            'searched' => true 
+        ]);
+        
     }
 }
         
