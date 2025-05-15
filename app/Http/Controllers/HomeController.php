@@ -27,18 +27,7 @@ class HomeController extends Controller
         $books = Book::all();
         //dd($books);
 
-        foreach ($books as $book) {
-            if (!empty($book->isbn)) {
-                $url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" . $book->isbn;
-                $json = @file_get_contents($url);
-                $data = json_decode($json, true);
-                $thumbnail = $data['items'][0]['volumeInfo']['imageLinks']['thumbnail'] ?? null;
-                $book->thumbnail = $thumbnail;
-            } else {
-                $book->thumbnail = null;
-            }
-        }
-
+        
         return view('books.top', ['books' => $books]);
     }
 
@@ -51,126 +40,16 @@ class HomeController extends Controller
         $keyword = $request->input('title');
 
         if (empty($keyword)) {
-            // 検索キーワードが空なら全件表示または空配列（好みに応じて）
-            $books = [];
+            // 検索キーワードが空なら全件表示にする
+            $books = Book::all();
         } else {
             // titleカラムに部分一致する本を取得
             $books = Book::where('title', 'like', '%' . $keyword . '%')->get();
 
-            foreach ($books as $book) {
-                if (!empty($book->isbn)) {
-                    $url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" . $book->isbn;
-                    $json = @file_get_contents($url);
-                    $data = json_decode($json, true);
-                    $thumbnail = $data['items'][0]['volumeInfo']['imageLinks']['thumbnail'] ?? null;
-                    $book->thumbnail = $thumbnail;
-                } else {
-                    $book->thumbnail = null;
-                }
-            }
+            
         }
 
         return view('books.top', compact('books', 'keyword'));
     }
 }
-        //入力された検索条件をURLに埋め込む
-       //$query = 'title="' . $request->title .'"'; // 検索キーワードと条件
-        //$url = 'https://iss.ndl.go.jp/api/sru?operation=searchRetrieve&query=' . urlencode($query) . '&recordSchema=dcndl&maximumRecords=10';
         
-        //APIの実行。取得された本情報を$xmlに格納する
-        //$xml = file_get_contents($url);
-        //$data = simplexml_load_string($xml);
-        
-        //$data->registerXPathNamespace('srw', 'http://www.loc.gov/zing/srw/');
-        //$data->registerXPathNamespace('dc', 'http://purl.org/dc/elements/1.1/');
-        //$data->registerXPathNamespace('dcndl', 'http://ndl.go.jp/dcndl/terms/');
-        //$data->registerXPathNamespace('xsi', 'http://www.w3.org/2001/XMLSchema-instance');
-
-       // $records = $data->xpath('//srw:recordData');
-        //dd($records);
-        //$message = "";
-
-        //foreach ($records as $record) {
-            //$record->registerXPathNamespace('srw', 'http://www.loc.gov/zing/srw/');
-           // $record->registerXPathNamespace('dc', 'http://purl.org/dc/elements/1.1/');
-            //$record->registerXPathNamespace('dcndl', 'http://ndl.go.jp/dcndl/terms/');
-            //$record->registerXPathNamespace('xsi', 'http://www.w3.org/2001/XMLSchema-instance');
-            //dd($record);
-
-            //$isbnNodes = $record->xpath('.//dc:identifier[@xsi:type="dcndl:ISBN"]');
-            
-            // ISBNがなければスキップ
-            //if (empty($isbnNodes)) {
-               //continue; 
-            //}
-
-            //$title = $record->xpath('.//dc:title')[0] ?? '';
-            //$creator = $record->xpath('.//dc:creator')[0] ?? '';
-            //$publisher = $record->xpath('.//dc:publisher')[0] ?? '';
-            //$date = $record->xpath('.//dc:date')[0] ?? '';
-            // ISBNだけを抽出（xsi:type="dcndl:ISBN"）
-            //$isbnNodes = $record->xpath('.//dc:identifier[@xsi:type="dcndl:ISBN"]');
-            //$isbn = isset($isbnNodes[0]) ? (string)$isbnNodes[0] : '';
-
-            // 結果出力
-            //$message = $isbn;
-            
-            
-        //}
-        //dd($xml);
-        //$xmlObj = simplexml_load_string($xml);
-        //dd($xmlObj);
-        //$exResData = simplexml_load_string($xmlObj->records);
-        // $xmlObj->records[0] が SimpleXMLElement の要素だと仮定
-        //$recordData = (string) $xmlObj->records->record[1]->recordData;
-        // XMLとして再パース
-        //$innerXml = simplexml_load_string($recordData);
-
-        // 利用可能な名前空間を取得
-        //$namespaces = $innerXml->getNamespaces(true);
-
-        // "dc" 名前空間を使って要素にアクセス
-        //$dc = $innerXml->children($namespaces['dc']);
-
-        //dd($xml,$dc,$xmlObj);
-        
-
-        // XMLとして再パース
-        //$innerXml = simplexml_load_string($recordData);
-
-        //dd($innerXml,$recordData);
-      
-        //$books = [];
-
-        //$xmlがfalseのときは本情報の取得に失敗
-        //if ($xml === false) {
-            //echo "データの取得に失敗しました。\n";
-       //} else {
-                        
-            // ＜ここで正規表現を使って <recordData>～</recordData> を抜き出す＞
-            //preg_match_all('/<recordData>(.*?)<\/recordData>/s', $xml, $matches);
-            
-            //dd($matches);
-            // $matches[1]に、抜き出した結果が入っている
-                       
-            //if (isset($matches[1])) {
-                //foreach ($matches[1] as $mk => $mv) {
-                // ①抜き出した結果をhtmlspecialchar_decode()する
-                //$entity = htmlspecialchars_decode($mv, ENT_QUOTES);
-                // dcとか邪魔なのでどかす
-                //$entity = str_replace('dc:', '', $entity);
-                // ②タグ要素でkey=>valueの形にする
-                //$pattern = '/<(\w+)>(.*?)<\/\1>/';  // \1 は最初の () の中身と同じものを指す
-                //preg_match_all($pattern, $entity, $match2);
-        
-                    // 配列に変換
-                    //foreach ($match2[1] as $index => $key) {
-                        //$books[$mk][$key] = $match2[2][$index];
-                    //}
-                //}
-            //}
-        //dd($books);
-
-            
-           //return view('books.top',compact('books'));
-
