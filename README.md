@@ -14,10 +14,10 @@
 
 ## 🖼️ 画面イメージ
 ### トップページ
-![トップページ](./images/search-form.png)
+![トップページ](./images/search-form.png)](./images/search-form.png)
 
 ### 検索結果ページ
-![検索結果](./images/search-result.png)
+![検索結果](./images/search-result.png)](./images/search-result.png)
 
 ## ⏳ 制作期間
 約4週間（2025年4月中旬〜5月中旬）
