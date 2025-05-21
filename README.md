@@ -30,5 +30,7 @@
 - 絵本のカテゴリ機能や評価機能の追加
 - UIデザインの改善（メンターと相談しながら予定）
 
-開発はWindowsで行い、Visual Studio Codeを使用しました。ローカルサーバーはLaravelのartisan serveを用いて起動しています。
+## 💻 開発環境
 
+開発はWindowsで行い、Visual Studio Codeを使用しました。  
+ローカルサーバーはLaravelの `artisan serve` を用いて起動しています。
