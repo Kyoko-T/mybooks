@@ -7,18 +7,7 @@ use App\Models\Book;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     
-    //public function __construct()
-    //{
-        //ログインしていないとこのコントローラの中身は使わせないという意味
-        //$this->middleware('auth');
-    //}
-
     /**
      * Show the application dashboard.
      *
@@ -30,7 +19,10 @@ class HomeController extends Controller
         //dd($books);
 
         
-        return view('books.top', ['books' => $books]);
+        return view('books.top', [
+            'books' => $books,
+            'searched' => true
+        ]);
     }
 
     /**
