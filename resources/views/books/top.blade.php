@@ -11,6 +11,7 @@
             <div class="col-md-8 mx-auto">
                 <h2>絵本検索</h2>
 
+                {{-- このフォームの中にあるデータを、searchというURLに、GET形式で送信 --}}
                 <form action="{{ route('search') }}" method="get">
                     
 
