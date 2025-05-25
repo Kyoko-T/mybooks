@@ -15,11 +15,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // Bookモデルを使って、booksテーブルの全レコードを取得
         $books = Book::all();
         //dd($books);
 
-        
+        // books/top.blade.php にデータを渡して画面を表示
         return view('books.top', [
+            // 絵本データ（全件）をビューに渡す
             'books' => $books,
             'searched' => true
         ]);
@@ -31,6 +33,7 @@ class HomeController extends Controller
      */
     public function search(Request $request)
     {
+        // ユーザーからの検索キーワードを取得
         $keyword = $request->input('title');
 
         // 検索キーワードが空なら全件表示にする
