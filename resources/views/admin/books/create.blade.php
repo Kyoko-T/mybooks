@@ -23,25 +23,37 @@
                     <div class="form-group row">
                         <label class="col-md-2">タイトル</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="title" value="{{ old('title') }}">
+                            <input type="text" class="form-control" title="title" value="{{ old('title') }}">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2">作家名</label>
+                        <label class="col-md-2">説明文</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                            <textarea class="form-control" name="caption" rows="5">{{ old('caption') }}</textarea>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2">出版年月日</label>
+                        <label class="col-md-2">キーワード</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                            <input type="text" class="form-control" keyword="keyword" value="{{ old('keyword') }}">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2">紹介文</label>
+                        <label class="col-md-2">著者</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="text" rows="10">{{ old('text') }}</textarea>
+                            <input type="text" class="form-control" creator="creator" value="{{ old('creator') }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2">出版社</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" publisher="publisher" value="{{ old('publisher') }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2">ISBN</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" isbn="isbn" value="{{ old('isbn') }}">
                         </div>
                     </div>
                     <div class="form-group row">
