@@ -44,8 +44,8 @@
                                         <strong>出版社:</strong> {{ $book->publisher ?? '不明' }}<br>
                                         <strong>ISBN:</strong> {{ $book->isbn ?? 'なし' }}<br>
 
-                                        @if ($book->image)
-                                            <img src="{{ asset('img/' . $book->image) }}" alt="{{ $book->title }}" style="max-width: 200px;">
+                                        @if ($book->image_path)
+                                            <img src="{{ asset('storage/image/' . $book->image_path) }}" alt="{{ $book->title }}" style="max-width: 200px;">
                                         @else
                                             <p>画像なし</p>
                                         @endif

@@ -23,7 +23,7 @@
                     <div class="form-group row">
                         <label class="col-md-2">タイトル</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" title="title" value="{{ old('title') }}">
+                            <input type="text" class="form-control" name="title" value="{{ old('title') }}">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -35,25 +35,25 @@
                     <div class="form-group row">
                         <label class="col-md-2">キーワード</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" keyword="keyword" value="{{ old('keyword') }}">
+                            <input type="text" class="form-control" name="keyword" value="{{ old('keyword') }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">著者</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" creator="creator" value="{{ old('creator') }}">
+                            <input type="text" class="form-control" name="creator" value="{{ old('creator') }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">出版社</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" publisher="publisher" value="{{ old('publisher') }}">
+                            <input type="text" class="form-control" name="publisher" value="{{ old('publisher') }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">ISBN</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" isbn="isbn" value="{{ old('isbn') }}">
+                            <input type="text" class="form-control" name="isbn" value="{{ old('isbn') }}">
                         </div>
                     </div>
                     <div class="form-group row">
