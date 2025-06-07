@@ -65,6 +65,9 @@
                     @csrf
                     <input type="submit" class="btn btn-primary" value="更新">
                 </form>
+                <div class="col-md-4">
+            　      <a href="{{ route('admin.books.index')  }}" role="button" class="btn btn-primary">一覧に戻る</a>
+                </div>
             </div>
         </div>
     </div>

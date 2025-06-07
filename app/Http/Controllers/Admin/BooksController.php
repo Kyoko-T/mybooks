@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Storage;
 class BooksController extends Controller
 {
     //以下追記
-    public function index()
-    {
-        return view('books.top', ['books' => $books]);
-    }
-
     public function add()
     {
         return view('admin.books.create');
@@ -55,5 +50,31 @@ class BooksController extends Controller
 
     }
 
+    //本の一覧画面（管理者用）を作成
+    public function index(Request $request)
+    {
+        $cond_title = $request->cond_title;
+        if ($cond_title != null) {
+            // 検索されたら検索結果を取得する
+            $posts = Book::where('title', $cond_title)->get();
+        } else {
+            // それ以外はすべての本の情報を取得する
+            $posts = Book::all();
+        }    
+        return view('admin.books.index', ['posts' => $posts, 'cond_title' => $cond_title]);
+    }
+    
+    // 以下を追記
+    public function delete(Request $request)
+    {
+        // 該当するBook Modelを取得
+        $news = Book::find($request->id);
+
+        // 削除する
+        $news->delete();
+
+        return redirect('admin/books/');
+    }
+    
    
 }

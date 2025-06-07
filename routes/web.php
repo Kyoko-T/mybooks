@@ -27,3 +27,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/search', [App\Http\Controllers\HomeController::class, 'search'])->name('search');
+
+
+Route::controller(BooksController::class)->prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::get('books/create', 'add')->name('books.add');
+    Route::post('books/create', 'create')->name('books.create');
+    Route::get('books', 'index')->name('books.index');
+    Route::get('books/delete', 'delete')->name('books.delete');
+});
