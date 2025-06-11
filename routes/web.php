@@ -34,4 +34,6 @@ Route::controller(BooksController::class)->prefix('admin')->name('admin.')->midd
     Route::post('books/create', 'create')->name('books.create');
     Route::get('books', 'index')->name('books.index');
     Route::get('books/delete', 'delete')->name('books.delete');
+    Route::get('books/edit', 'edit')->name('books.edit');
+    Route::post('books/edit', 'update')->name('books.update');
 });

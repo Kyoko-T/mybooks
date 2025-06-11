@@ -68,13 +68,49 @@ class BooksController extends Controller
     public function delete(Request $request)
     {
         // 該当するBook Modelを取得
-        $news = Book::find($request->id);
+        $book = Book::find($request->id);
 
         // 削除する
-        $news->delete();
+        $book->delete();
 
         return redirect('admin/books/');
     }
     
-   
+    public function edit(Request $request)
+    {
+        $book = Book::find($request->id);
+        if (empty($book)) {
+            abort(404);
+        }
+        return view('admin.books.edit', ['book_form' => $book]);
+    }
+
+    public function update(Request $request)
+    {
+        // Validationをかける
+        $this->validate($request, Book::$rules);
+        // Book Modelからデータを取得する
+        $book = Book::find($request->id);
+
+        // 送信されてきたフォームデータを格納する
+        $book_form = $request->all();
+
+        if ($request->remove == 'true') {
+            $book_form['image_path'] = null;
+        } elseif ($request->file('image')) {
+            $path = $request->file('image')->store('public/image');
+            $book_form['image_path'] = basename($path);
+        } else {
+            $book_form['image_path'] = $book->image_path;
+        }
+        
+        unset($book_form['image']);
+        unset($book_form['remove']);
+        unset($book_form['_token']);
+
+        // 該当するデータを上書きして保存する
+        $book->fill($book_form)->save();
+
+        return redirect('admin/books');
+    }
 }
