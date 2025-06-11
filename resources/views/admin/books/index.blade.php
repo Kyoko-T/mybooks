@@ -48,10 +48,10 @@
                                     <td>{{ Str::limit($books->keyword, 100) }}</td>
                                     <td>
                                         <div>
-                                            <a href="{{ route('admin.books.edit', ['id' => $books->id]) }}">編集</a>
+                                            <a href="{{ route('admin.books.edit', ['id' => $books->id]) }}" class="text-primary">編集</a>
                                         </div>
                                         <div>
-                                            <a href="{{ route('admin.books.delete', ['id' => $books->id]) }}">削除</a>
+                                            <a href="{{ route('admin.books.delete', ['id' => $books->id]) }}" class="text-danger">削除</a>
                                         </div>
                                     </td>    
                                 </tr>
