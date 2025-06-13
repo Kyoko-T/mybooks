@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
+use Exception;
 
 //Bookモデルを読み込む
 use App\Models\Book;
@@ -39,12 +42,21 @@ class BooksController extends Controller
         unset($form['_token']);
         //file本体はいらないので消す
         unset($form['image']);
+        $form['image'] = 'no use';
         
 
         //データベースに保存
-        $book = new Book();
-        $book->fill($form)->save();
-
+        try {
+            $book = new Book();
+            $book->fill($form)->save();
+            echo "保存成功！";
+        } catch (QueryException $e) {
+            echo "クエリエラー: " . $e->getMessage();
+        } catch (ModelNotFoundException $e) {
+            echo "モデルが見つかりません: " . $e->getMessage();
+        } catch (Exception $e) {
+            echo "その他のエラー: " . $e->getMessage();
+        }
         //フォームに戻る
         return redirect('admin/books/create')->with('success', '本を登録しました');
 
