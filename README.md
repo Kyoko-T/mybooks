@@ -14,7 +14,7 @@
 
 ## 🖼️ 画面イメージ
 ### トップページ
-[![トップページ](./images/home-form.png)](./images/home-form.png)
+[![トップページ](./images/top-form.png)](./images/top-form.png)
 
 ### 検索結果ページ
 [![検索結果ページ](./images/search-result.png)](./images/search-result.png)
