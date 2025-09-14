@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', '登録済み絵本の一覧')
+@section('title', '登録済の絵本一覧')
 
 @section('content')
     <div class="container">
