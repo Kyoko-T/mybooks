@@ -35,3 +35,7 @@
 
 開発はWindowsで行い、Visual Studio Codeを使用しました。  
 ローカルサーバーはLaravelの `artisan serve` を用いて起動しています。
+
+### 更新メモ
+- 2025/09/14 textareaの行数を調整
+- 学習継続中
