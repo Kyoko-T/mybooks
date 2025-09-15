@@ -29,7 +29,7 @@
                     <div class="form-group row">
                         <label class="col-md-2">説明文</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="caption" rows="7">{{ old('caption') }}</textarea>
+                            <textarea class="form-control" name="caption" rows="3">{{ old('caption') }}</textarea>
                         </div>
                     </div>
                     <div class="form-group row">
